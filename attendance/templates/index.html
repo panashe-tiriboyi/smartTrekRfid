@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+        
+    {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Log Out</button>
+    </form>
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+
+
+    {% if web_input %}
+        <div class="alert alert-success">
+            {{ messages }}
+        </div>
+    {% endif %}
+
+
+    <h1>Smart Log Book</h1>
+      <table class="container">
+        <thead>
+            <tr>
+                <th><h1>id</h1></th>
+                <th><h1>status</h1></th>
+                <th><h1>Card Id</h1></th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            {% for rec in attendance_records %}
+                <tr>
+                    <td>{{ rec.id }}</td>
+                    <td>{{ rec.status }}</td>
+                    <td>{{ rec.card_id }}</td>
+                    <!-- Add other fields here (e.g., rec.entrance_time, rec.exit_time, etc.) -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Check-In</h1>
+
+        <p class="success-message" id="employee-message">Successfully logged in as Employee ID {{ id }}</p>
+
+    
+        <!-- {% if id %}
+            <p class="success-message">Successfully logged in as Employee ID {{ id }}</p>
+        {% else %}
+            <p class="error-message">Invalid login. Please try again.</p>
+        {% endif %} -->
+    </div>
+
+    <script>
+        // Get the value of 'id' from Django (you can set this dynamically)
+        var idValue = '{{ id }}';  // Replace with the actual value
+    
+        // Get the success message element
+        var successMessage = document.getElementById('employee-message');
+    
+        // Check if 'id' is truthy (not null, undefined, or empty string)
+        if (idValue) {
+            successMessage.style.display = 'block';  // Show the element
+        } else {
+            successMessage.style.display = 'none';   // Hide the element
+        }
+    </script>
+    
+</body>
+</html>
